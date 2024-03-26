@@ -68,7 +68,7 @@ body {
 </div>
 
 <script>
-$(document).ready(function(){
+{% comment %} $(document).ready(function(){
 
 setInterval(function(){
     $.ajax({
@@ -88,7 +88,7 @@ setInterval(function(){
         }
     });
 },1000);
-})
+}) {% endcomment %}
 </script>
 
 

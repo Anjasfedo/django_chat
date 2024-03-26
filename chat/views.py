@@ -7,7 +7,15 @@ def home(request):
     return render(request, 'home.html')
 
 def room(request, room):
-    context = {}
+    username = request.GET['username']
+    
+    room_details = Room.objects.get(name=room)
+    
+    context = {
+        'username': username,
+        'room': 'room',
+        'room_details': room_details
+    }
     
     return render(request, 'room.html', context)
 
@@ -22,7 +30,3 @@ def checkview(request):
         new_room.save
         
         return redirect('/' + room + '/?username=' + username)
-    
-    context = {}
-    
-    return render(request, 'template.html', context)
