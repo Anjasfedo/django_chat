@@ -1,14 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>{{ room }} - DjChat</h2>
+  <h1 class="text-3xl font-bold mb-8">{{ room }} - Django Chat</h1>
 
-  <div id="display"></div>
+  <div id="display" class="text-left space-y-8 my-4">
+    {% if True %}
+      <div class="chat chat-start">
+        <div class="chat-bubble">
+          <span><h2 class="text-xl font-semibold">lorem</h2></span>
+          <span><p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi ad laudantium necessitatibus quam, voluptate eius esse obcaecati in, error magnam illo animi dolores placeat qui? Fugit alias suscipit itaque? Unde?</p></span>
+          <span>jan 11</span>
+        </div>
+      </div>
+    {% else %}
+      <div class="chat chat-end">
+        <div class="chat-bubble">
+          <span><h2 class="text-xl font-semibold">lorem</h2></span>
+          <span><p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi ad laudantium necessitatibus quam, voluptate eius esse obcaecati in, error magnam illo animi dolores placeat qui? Fugit alias suscipit itaque? Unde?</p></span>
+          <span>jan 11</span>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
   <form id="post-form">
     {% csrf_token %}
     <input type="hidden" name="username" id="username" value="{{ username }}" />
     <input type="hidden" name="room_id" id="room_id" value="{{ room_details.id }}" />
-    <input type="text" name="message" id="message" width="100px" />
-    <input type="submit" value="Send" />
+    <input type="text" name="message" id="message" class="input input-bordered w-full max-w-xs" />
+    <button class="btn btn-outline btn-success relative my-4" type="submit">Send<span class="loading loading-spinner absolute right-5"></span></button>
   </form>
 {% endblock %}

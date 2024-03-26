@@ -44,7 +44,6 @@ def send(request):
     return HttpResponse('Message sent')
 
 def getMessages(request, room):
-    encoded_room = quote(room)
     room_details = Room.objects.get(name=room)
     
     messages = Message.objects.filter(room=room_details.id)
