@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold mb-8">{{ room }} - Django Chat</h1>
+
+  <div id="display" class="text-left space-y-8 my-4" hx-get="/getMessages/{{ room }}/?username={{ username }}" hx-trigger="every 3s" hx-swap="innerHTML"></div>
+
+  <form id="post-form" hx-post="send" hx-swap="none">
+    {% csrf_token %}
+    <input type="hidden" name="username" id="username" value="{{ username }}" />
+    <input type="hidden" name="room_id" id="room_id" value="{{ room_details.id }}" />
+    <input type="text" name="message" id="message" class="input input-bordered w-full max-w-xs" />
+    <button class="btn btn-outline btn-success relative my-4" type="submit">Send<span class="loading loading-spinner absolute right-5"></span></button>
+  </form>
+{% endblock %}

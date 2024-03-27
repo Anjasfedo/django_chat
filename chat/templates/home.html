@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form id="post-form" method="POST" action="checkview" class="flex flex-col">
+    {% csrf_token %}
+    <label class="form-control w-full max-w-xs mb-4">
+      <div class="label">
+        <span class="label-text">Room name</span>
+      </div>
+      <input type="text" name="room_name" id="room_name" class="input input-bordered w-full max-w-xs" />
+    </label>
+    <label class="form-control w-full max-w-xs mb-4">
+      <div class="label">
+        <span class="label-text">Username</span>
+      </div>
+      <input type="text" name="username" id="username" class="input input-bordered w-full max-w-xs" />
+    </label>
+    <button class="btn btn-outline btn-info relative my-4" type="submit">Enter Room<span class="loading loading-spinner absolute right-5"></span></button>
+  </form>
+{% endblock %}
