@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Room, Message
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from urllib.parse import quote
 
 # Create your views here.
@@ -33,19 +33,25 @@ def checkview(request):
         
         return redirect('/' + room + '/?username=' + username)
 
-def send(request):
-    message = request.POST['message']
-    room_id = request.POST['room_id']
-    username = request.POST['username']
+def send(request, room):
+    if request.method == 'POST':
+        message = request.POST['message']
+        room_id = request.POST['room_id']
+        username = request.POST['username']
 
-    new_message = Message.objects.create(value=message, username=username, room=room_id)
-    new_message.save
+        new_message = Message.objects.create(value=message, username=username, room=room_id)
+        new_message.save
     
-    return HttpResponse('Message sent')
+    return HttpResponse("Message sent")
 
 def getMessages(request, room):
     room_details = Room.objects.get(name=room)
     
     messages = Message.objects.filter(room=room_details.id)
     
-    return JsonResponse({"messages":list(messages.values())})
+    context = {
+        'username': request.GET.get('username'),
+        'messages': messages
+    }
+    
+    return render(request, 'htmx/chat.html', context)

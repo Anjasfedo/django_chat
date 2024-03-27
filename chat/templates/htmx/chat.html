@@ -1,0 +1,21 @@
+
+{% for message in messages %}
+{% if not message.username == username %}
+<div class="chat chat-start">
+  <div class="chat-bubble">
+    <span><h2 class="text-xl font-semibold">{{message.username}}</h2></span>
+    <span><p>{{message.value}}</p></span>
+    <span>{{message.date}}</span>
+  </div>
+</div>
+{% else %}
+<div class="chat chat-end">
+  <div class="chat-bubble">
+    <span><h2 class="text-xl font-semibold">{{message.username}}</h2></span>
+    <span><p>{{message.value}}</p></span>
+    <span>{{message.date}}</span>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+    
